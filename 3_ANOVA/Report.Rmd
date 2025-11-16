@@ -1,0 +1,93 @@
+---
+title: "Analyzing the Effects of Larval and Maternal Host Plants Using Two-Way ANOVA"
+author: "Yaqi Jiao"
+date: "2025-11-16"
+output:
+  pdf_document:
+    latex_engine: xelatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+
+# source function
+source("Scripts/Analysis_and_Plot.R")
+
+# read data
+dat <-  read.csv("Data/butterflies.csv")
+
+# make factors
+factorA <- factor(dat$LarvalHost)
+factorB <- factor(dat$MaternalHost)
+
+# define responses
+responses <- c("DevelopmentTime", "AdultWeight", "GrowthRate")
+```
+
+## Introduction
+
+This report examines how the host plants of female butterflies and their larvae affect larval development. Specifically, we analyze larval developmental time, adult weight, and growth rate across two different maternal and larval host plants.
+
+
+## Methods
+
+We fitted a linear model to quantify the effects of larval host plant (LarvalHost) and maternal host plant (MaternalHost) on larval developmental time (DevelopmentTime). A two-way ANOVA was then performed on the fitted model to test for significant main and interaction effects between the two host plant factors.
+
+All analyses were conducted using a custom R function (analysis_and_plot) developed for this project. The full function code is available on GitHub ()
+
+To visualize the impact, we plotted the mean developmental time for each combination of host plants with error bars representing the standard error.
+
+## Results
+### 1. The influence on development time 
+
+```{r, fig.width=5, fig.height=3, echo=FALSE}
+res <- analysis_and_plot("DevelopmentTime", dat, "DevelopmentTime", "Development Time depend on host")
+
+knitr::kable(res$anova_table, booktabs = TRUE, digits = 3, caption = "ANOVA results")
+knitr::kable(res$coef_table, booktabs = TRUE, digits = 3, caption = "Linear model coefficients")
+
+res$plot
+
+```
+
+The intercept represents the mean development time for larval rared on the Barbarea (the reference group). larvae reared on Berteroa developed about *5.3 days* longer than those on the reference host. larvae whose mothers were reared on Berteroa developed about *1.8 days* longer than those with mothers on the reference host.There was a significant interaction: the combination of both larval and maternal host being Berteroa increased development time by an additional *2.2 days* beyond the additive effects.
+
+Residual variation was relatively small (mean squared error ≈ 3.5), indicating that most variation is explained by larval and maternal host plants.
+
+Larvae feeding on Berteroa develop significantly slower than those feeding on the Barbarea. Biologically, this could indicate that Berteroa is a lower-quality host or requires more time to extract nutrients.
+
+
+### 2. The influence on Adult Weight
+
+```{r,fig.width=5, fig.height=3, echo=FALSE}
+res <- analysis_and_plot("AdultWeight", dat, "AdultWeight", "Adult Weight depend on host")
+
+knitr::kable(res$anova_table, booktabs = TRUE, digits = 3, caption = "ANOVA results")
+knitr::kable(res$coef_table, booktabs = TRUE, digits = 3, caption = "Linear model coefficients")
+
+res$plot
+```
+
+The intercept represents the mean adult weight for larval rared on the Barbarea (the reference group). Adult weight differed mainly depending on the larval host plant. The baseline weight for larvae on the reference host with mothers on the reference host is approximately *65.4 mg*. Larvae feeding on Berteroa weighed about *11.85 mg* less than those on the reference host, a large and highly significant decrease. The maternal host had little effect: larvae whose mothers were reared on Berteroa were only slightly heavier *(+1.37 mg)*, and this was not statistically significant. There is a marginal interaction (LarvalHost × MaternalHost) of *-4.5 mg*, suggesting that the combined effect of Berteroa for both mother and larva reduces weight slightly beyond the additive effects (p ≈ 0.054).
+
+Residual variation (mean squared error ≈ 89.9) is relatively high compared to the size of the interaction effect, indicating individual differences still contribute to variation in adult weight.
+
+### 3. The influence on Growth Rate
+
+```{r,fig.width=5, fig.height=3, echo=FALSE}
+res <- analysis_and_plot("GrowthRate", dat, "GrowthRate", "Growth Rate depend on host")
+
+knitr::kable(res$anova_table, booktabs = TRUE, digits = 3, caption = "ANOVA results")
+knitr::kable(res$coef_table, booktabs = TRUE, digits = 3, caption = "Linear model coefficients")
+
+res$plot
+```
+
+Larvae feeding on Berteroa grew *0.0195 units/day* slower than those on the reference host. This is a very strong effect.Larvae whose mothers were reared on Berteroa grew *0.00578 units/day* slower. This is smaller than the larval host effect but still significant. The combination of larval Berteroa and maternal Berteroa further reduced growth by *0.00353 units/day*, indicating a small but significant compounded effect.
+
+Residual variation is low, indicating that most variation is explained by the host plant factors.
+
+Biologically, the larval diet strongly limits growth; Berteroa is lower quality, slowing development.

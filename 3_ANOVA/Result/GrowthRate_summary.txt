@@ -1,0 +1,40 @@
+===== ANOVA =====
+Analysis of Variance Table
+
+Response: GrowthRate
+                         Df    Sum Sq   Mean Sq  F value Pr(>F)    
+LarvalHost                1 0.0310561 0.0310561 875.4154 <2e-16 ***
+MaternalHost              1 0.0035847 0.0035847 101.0475 <2e-16 ***
+LarvalHost:MaternalHost   1 0.0002080 0.0002080   5.8621 0.0161 *  
+Residuals               283 0.0100397 0.0000355                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
+===== SUMMARY =====
+
+Call:
+lm(formula = formu, data = dat)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-0.0191549 -0.0034058  0.0004718  0.0041452  0.0126051 
+
+Coefficients:
+                                          Estimate Std. Error t value Pr(>|t|)
+(Intercept)                              0.0837158  0.0005897 141.952  < 2e-16
+LarvalHostBerteroa                      -0.0194909  0.0009964 -19.561  < 2e-16
+MaternalHostBerteroa                    -0.0057776  0.0008959  -6.449 4.85e-10
+LarvalHostBerteroa:MaternalHostBerteroa -0.0035335  0.0014594  -2.421   0.0161
+                                           
+(Intercept)                             ***
+LarvalHostBerteroa                      ***
+MaternalHostBerteroa                    ***
+LarvalHostBerteroa:MaternalHostBerteroa *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.005956 on 283 degrees of freedom
+Multiple R-squared:  0.7763,	Adjusted R-squared:  0.774 
+F-statistic: 327.4 on 3 and 283 DF,  p-value: < 2.2e-16
+
