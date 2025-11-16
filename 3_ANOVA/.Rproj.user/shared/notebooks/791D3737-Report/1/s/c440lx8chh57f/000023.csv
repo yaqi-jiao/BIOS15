@@ -1,1 +1,0 @@
-"0","knitr::kable(res$coef_table, booktabs = TRUE, digits = 3, caption = ""Linear model coefficients"")"

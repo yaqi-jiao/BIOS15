@@ -1,3 +1,0 @@
-"0","res <- analysis_and_plot(""GrowthRate"", dat, ""GrowthRate"", ""Growth Rate depend on host"")"
-"2","`summarise()` has grouped output by 'LarvalHost'. You can override using the `.groups` argument."
-"0","knitr::kable(res$anova_table, booktabs = TRUE, digits = 3, caption = ""ANOVA results"")"
