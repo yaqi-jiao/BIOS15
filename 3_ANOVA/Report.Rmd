@@ -36,7 +36,7 @@ This report examines how the host plants of female butterflies and their larvae 
 
 We fitted a linear model to quantify the effects of larval host plant (LarvalHost) and maternal host plant (MaternalHost) on larval developmental time (DevelopmentTime). A two-way ANOVA was then performed on the fitted model to test for significant main and interaction effects between the two host plant factors.
 
-All analyses were conducted using a custom R function (analysis_and_plot) developed for this project. The full function code is available on GitHub ()
+All analyses were conducted using a custom R function (analysis_and_plot) developed for this project. The full function code is available on GitHub (https://github.com/yaqi-jiao/BIOS15/blob/master/3_ANOVA/Scripts/Analysis_and_Plot.R)
 
 To visualize the impact, we plotted the mean developmental time for each combination of host plants with error bars representing the standard error.
 
